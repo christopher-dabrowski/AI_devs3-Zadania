@@ -1,11 +1,11 @@
-using AiDevsApi.Models;
-using AiDevsApi.Services;
-using ApiTestTask.AiDevsApi.Contracts;
+using Common.AiDevsApi.Contracts;
+using Common.AiDevsApi.Models;
+using Common.AiDevsApi.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace AiDevsApi.Extensions;
+namespace Common.AiDevsApi.Extensions;
 
 public static class ServiceCollectionExtensions
 {

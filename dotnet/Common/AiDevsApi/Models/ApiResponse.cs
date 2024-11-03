@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AiDevsApi.Models;
+namespace Common.AiDevsApi.Models;
 
 public class ApiResponse
 {

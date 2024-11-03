@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace AiDevsApi.Models;
+namespace Common.AiDevsApi.Models;
 
 public class AiDevsApiOptions
 {

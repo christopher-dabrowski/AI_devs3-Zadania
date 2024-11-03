@@ -1,6 +1,6 @@
 {
     "profiles": {
-        "Development": {
+        "PreworkApi": {
             "commandName": "Project",
             "environmentVariables": {
                 "ASPNETCORE_ENVIRONMENT": "Development",

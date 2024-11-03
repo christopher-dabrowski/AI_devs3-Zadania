@@ -1,6 +1,6 @@
-using AiDevsApi.Models;
+using Common.AiDevsApi.Models;
 
-namespace ApiTestTask.AiDevsApi.Contracts;
+namespace Common.AiDevsApi.Contracts;
 
 public interface IAiDevsApiService
 {

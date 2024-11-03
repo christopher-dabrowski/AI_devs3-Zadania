@@ -1,10 +1,12 @@
 ﻿using System.Diagnostics;
 using System.Text.Json;
-using AiDevsApi.Extensions;
+using Common.AiDevsApi.Contracts;
+using Common.AiDevsApi.Extensions;
+using Common.AiDevsApi.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using AiDevsApi.Models;
-using ApiTestTask.AiDevsApi.Contracts;
+
+const string taskName = "POLIGON";
 
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((context, services) =>
@@ -24,7 +26,7 @@ var data = await GetAndParseDataAsync(httpClient);
 var apiService = serviceProvider.GetRequiredService<IAiDevsApiService>();
 var answer = new TaskAnswer<string[]>()
 {
-    Task = "POLIGON",
+    Task = taskName,
     Answer = data
 };
 
