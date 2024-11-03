@@ -8,7 +8,7 @@ Gdy spisuję moje rozwiązania i przemyślenia to więcej wynoszę z nauki 😃
 Zadanie polegało na przetestowaniu komunikacji z API, którego będziemy używać w dalszych zadaniach.  
 Była do dla mnie świetna okazja, żeby nauczyć się korzystać z [Cursor IDE](https://www.cursor.com/).
 
-Moje rozwiązanie: [PreworkApi](./dotnet/PreworkApi/)
+Moje rozwiązanie: [PreworkApi](./dotnet/PreworkApi/Program.cs)
 
 Jestem pod wrażeniem, jak przyjemnie programowało mi się z pomocą AI.
 Do tej pory używałem trochę GitHub Copilot, ale nie byłem pod jakimś dużym wrażeniem.
