@@ -1,9 +1,9 @@
 using System.Net.Http.Json;
-using AiDevsApi.Models;
-using ApiTestTask.AiDevsApi.Contracts;
+using Common.AiDevsApi.Contracts;
+using Common.AiDevsApi.Models;
 using Microsoft.Extensions.Options;
 
-namespace AiDevsApi.Services;
+namespace Common.AiDevsApi.Services;
 
 public class AiDevsApiService : IAiDevsApiService
 {
