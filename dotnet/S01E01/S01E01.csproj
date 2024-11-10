@@ -5,7 +5,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <UserSecretsId>3de3f0eb-4475-4076-a629-094e16b7fe6d</UserSecretsId>
+    <UserSecretsId>ai-devs3</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
