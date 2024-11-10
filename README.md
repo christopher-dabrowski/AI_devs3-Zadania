@@ -1,6 +1,6 @@
 # AI_devs3-Zadania
 
-[![.NET Build](https://github.com/christopher-dabrowski/AI_devs3-Zadania/actions/workflows/dotnet-build.yml/badge.svg)](https://github.com/christopher-dabrowski/AI_devs3-Zadania/actions/workflows/dotnet-build.yml)
+[![.NET Build](https://github.com/christopher-dabrowski/AI_devs3-Zadania/actions/workflows/dotnet-build.yml/badge.svg?branch=main)](https://github.com/christopher-dabrowski/AI_devs3-Zadania/actions/workflows/dotnet-build.yml)
 
 Moje rozwiązania do zadań z kursu AI_devs3.  
 Gdy spisuję moje rozwiązania i przemyślenia to więcej wynoszę z nauki 😃
