@@ -25,19 +25,4 @@ public static class ServiceCollectionExtensions
 
         return services;
     }
-
-    public static IServiceCollection AddAiDevsApi(
-        this IServiceCollection services,
-        Action<AiDevsApiOptions> configureOptions)
-    {
-        services.Configure(configureOptions);
-
-        services.AddHttpClient<IAiDevsApiService, AiDevsApiService>((serviceProvider, client) =>
-        {
-            var options = serviceProvider.GetRequiredService<IOptions<AiDevsApiOptions>>().Value;
-            client.BaseAddress = new Uri(options.BaseUrl);
-        });
-
-        return services;
-    }
 }
