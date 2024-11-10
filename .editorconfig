@@ -11,3 +11,7 @@ quote_type = single
 [*.json]
 indent_style = space
 indent_size = 2
+
+[*.csproj]
+indent_style = space
+indent_size = 2
