@@ -20,6 +20,8 @@ jobs:
 
       - name: Restore dependencies
         run: dotnet restore
+        working-directory: ./dotnet
 
       - name: Build
         run: dotnet build --no-restore --configuration Release
+        working-directory: ./dotnet
