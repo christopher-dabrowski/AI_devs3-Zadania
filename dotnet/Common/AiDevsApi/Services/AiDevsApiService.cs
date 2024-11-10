@@ -9,7 +9,7 @@ public class AiDevsApiService : IAiDevsApiService
 {
     private readonly HttpClient _httpClient;
     private readonly string _apiKey;
-    private const string VerifyEndpoint = "/verify";
+    private const string VerifyEndpoint = IAiDevsApiService.VerifyEndpoint;
 
     public AiDevsApiService(
         HttpClient httpClient,
@@ -27,6 +27,7 @@ public class AiDevsApiService : IAiDevsApiService
 
     public async Task<ApiResponse> VerifyTaskAnswerAsync<TAnswer>(
         TaskAnswer<TAnswer> answer,
+        string endpoint = VerifyEndpoint,
         CancellationToken cancellationToken = default)
     {
         var request = new TaskRequest<TAnswer>

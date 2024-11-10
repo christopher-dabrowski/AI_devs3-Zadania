@@ -36,6 +36,7 @@ packages/
 
 # Local development settings
 appsettings.Local.json
+appsettings.Development.json
 
 # Environment files
 .env 
