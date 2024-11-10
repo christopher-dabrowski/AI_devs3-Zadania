@@ -8,5 +8,5 @@ public record XyzMessage
     public required string Text { get; set; }
 
     [JsonPropertyName("msgID")]
-    public required string MsgID { get; set; }
+    public int MsgID { get; set; } = 0;
 }
