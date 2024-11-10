@@ -1,3 +1,11 @@
+# Spis Treści
+
+- [Spis Treści](#spis-treści)
+- [AI\_devs3-Zadania](#ai_devs3-zadania)
+  - [PreworkApi](#preworkapi)
+  - [S01E01](#s01e01)
+  - [S01E02](#s01e02)
+
 # AI_devs3-Zadania
 
 [![.NET Build](https://github.com/christopher-dabrowski/AI_devs3-Zadania/actions/workflows/dotnet-build.yml/badge.svg?branch=main)](https://github.com/christopher-dabrowski/AI_devs3-Zadania/actions/workflows/dotnet-build.yml)
@@ -33,3 +41,17 @@ W implementacji wykorzystałem:
 - User Secrets do bezpiecznego przechowywania kluczy API i danych logowania
 
 Ciekawe było wykorzystanie System Message w OpenAI API, który wymusza zwracanie wyłącznie liczby, bez dodatkowych wyjaśnień. To pokazuje, jak ważny jest odpowiedni prompt engineering w pracy z AI.
+
+## S01E02
+
+Zadanie polegało na wykorzystaniu modelu językowego do przetwarzania i analizy wiadomości w dwóch krokach.
+
+Moje rozwiązanie: [S01E02](./dotnet/S01E02/Program.cs)
+
+W implementacji zastosowałem ciekawe podejście wykorzystujące sekwencyjne połączenie dwóch promptów, gdzie:
+
+- Pierwszy prompt przygotowywał dane dla drugiego
+- Model efektywnie pracował z własnymi wynikami
+- Większość kodu została wygenerowana przez Cursor IDE, co pokazuje potencjał AI w codziennej pracy programisty
+
+To doświadczenie pokazało, jak skuteczne może być łączenie różnych technik prompt engineeringu oraz wykorzystanie narzędzi AI do wspomagania procesu programowania.
