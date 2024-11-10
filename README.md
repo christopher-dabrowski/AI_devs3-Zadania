@@ -1,10 +1,11 @@
 # Spis Treści
 
 - [Spis Treści](#spis-treści)
-- [AI\_devs3-Zadania](#ai_devs3-zadania)
+- [AI_devs3-Zadania](#ai_devs3-zadania)
   - [PreworkApi](#preworkapi)
   - [S01E01](#s01e01)
   - [S01E02](#s01e02)
+  - [S01E03](#s01e03)
 
 # AI_devs3-Zadania
 
@@ -55,3 +56,17 @@ W implementacji zastosowałem ciekawe podejście wykorzystujące sekwencyjne po�
 - Większość kodu została wygenerowana przez Cursor IDE, co pokazuje potencjał AI w codziennej pracy programisty
 
 To doświadczenie pokazało, jak skuteczne może być łączenie różnych technik prompt engineeringu oraz wykorzystanie narzędzi AI do wspomagania procesu programowania.
+
+## S01E03
+
+Zadanie polegało na analizie dużego pliku z pytaniami i poprawienie w nim błędów.
+
+Moje rozwiązanie: [S01E03](./dotnet/S01E03/Program.cs)
+
+Głównym wyzwaniem była wielkość pliku wejściowego — zbyt duża, by przekazać całość do modelu językowego.
+Zastosowałem więc podejście hybrydowe:
+
+- Obliczenia matematyczne wykonałem programistycznie, bez użycia LLM
+- Model językowy wykorzystałem tylko do analizy pytań i generowania odpowiedzi na podstawie wcześniej obliczonych wyników
+
+To pokazuje, jak ważne jest odpowiednie rozdzielenie zadań między tradycyjne programowanie a AI, szczególnie przy ograniczeniach technicznych modeli językowych.
