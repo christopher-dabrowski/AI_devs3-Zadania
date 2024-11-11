@@ -6,6 +6,9 @@
   - [S01E01](#s01e01)
   - [S01E02](#s01e02)
   - [S01E03](#s01e03)
+  - [S01E04](#s01e04)
+  - [S01E05](#s01e05)
+  - [S02E01](#s02e01)
 
 # AI_devs3-Zadania
 
@@ -70,3 +73,30 @@ Zastosowałem więc podejście hybrydowe:
 - Model językowy wykorzystałem tylko do analizy pytań i generowania odpowiedzi na podstawie wcześniej obliczonych wyników
 
 To pokazuje, jak ważne jest odpowiednie rozdzielenie zadań między tradycyjne programowanie a AI, szczególnie przy ograniczeniach technicznych modeli językowych.
+
+## S01E04
+
+Zadanie polegało na napisaniu promptu, który nakieruje robota do celu, omijając przeszkody.
+Wykorzystanie do tego LLM okazało się zaskakująco trudne.
+Na początku próbowałem zrobić to bez wyznaczania konkretnej trasy modelowi, jednak bez skutku.
+Na razie roziwąwiązałem to zadanie w łatwiejszej wersji, gdzie model miał podążać za z góry ustaloną trasą.
+Moje rozwiązanie to [definedTrackSolution](prompty/S01E04/definedTrackSolution.txt).
+
+## S01E05
+
+Jeszcze nie zrobiłem, ale jeszcze tu wrócę ^^
+
+## S02E01
+
+Zadanie polegało na wygenerowaniu transkrypcji z plików audio z zeznaniami świadków oraz wykorzystanie modelu do przeanalizowania ich w celu ustalenia pewnego konkretnego adresu.
+
+Tym razem dla odmiany zdecydowałem się użyć pythona.
+Generowanie transkrypcji: [S02E01](python/S02E01/transcribe.py)  
+Podczas pracy z modelem whisper w pythonie miałem kilka kłopotów. Najpierw ze zbyt nową wersją pythona, a potem z wersją numpy.
+Już od paru lat nie używałem pythona, więc znalezienie rozwiązania mogłoby mi zając sporo czasu.
+Cursor na szczęście niezwykle sprawnie podsunął mi gotowe rozwiązania :D
+
+Mając gotowe transkrypcje również przy pomocy Cursor'a przeanalizowałem je i znalazłem odowiedź.  
+Mój prompt: [prompt.txt](python/S02E01/prompt.txt)
+
+Co ciekawe najpierw uruchmiłem go na modelu gpt-4o. Model ten dał znacznie gorszy wynik niż claude-3.5-sonnet.
