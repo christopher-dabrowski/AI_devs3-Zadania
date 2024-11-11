@@ -1,0 +1,23 @@
+Przeanalizujmy to krok po kroku, skupiając się głównie na zeznaniu Rafała jako najbardziej wiarygodnym:
+
+1. Z zeznania Rafała wynika kluczowa wskazówka:
+> "Ta ulica od matematyka co wpada w komendanta to chyba XX wiek"
+
+2. Inne istotne informacje z zeznań:
+- Według Moniki: pracował w Instytucie Informatyki, Matematyki Komputerowej
+- Według Michała i Agnieszki: pracował w Krakowie
+- Według Rafała: to jest "królewska uczelnia" (Uniwersytet Jagielloński)
+
+3. Analizując wskazówkę Rafała:
+- Ulica "od matematyka" - sugeruje ulicę nazwaną imieniem matematyka
+- "wpada w komendanta" - sugeruje, że ta ulica łączy się z ulicą nazwaną imieniem jakiegoś komendanta
+- Znajduje się tam instytut związany z matematyką/informatyką
+
+Biorąc pod uwagę te informacje i fakt, że mówimy o Krakowie, najbardziej prawdopodobną lokalizacją jest:
+
+**ulica Stanisława Łojasiewicza**
+
+Uzasadnienie:
+- Stanisław Łojasiewicz był wybitnym polskim matematykiem
+- Ulica Łojasiewicza w Krakowie łączy się z ulicą Józefa Piłsudskiego (który był Naczelnym Wodzem/Komendantem)
+- Na tej ulicy znajduje się Wydział Matematyki i Informatyki UJ, w tym Instytut Informatyki i Matematyki Komputerowej
