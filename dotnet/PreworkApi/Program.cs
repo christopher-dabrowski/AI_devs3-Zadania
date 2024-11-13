@@ -30,7 +30,7 @@ var answer = new TaskAnswer<string[]>()
     Answer = data
 };
 
-var apiResponse = await apiService.VerifyTaskAnswerAsync(answer);
+var apiResponse = await apiService.VerifyTaskAnswerAsync(answer, IAiDevsApiService.VerifyEndpoint);
 Console.WriteLine(JsonSerializer.Serialize(apiResponse));
 
 Debug.Assert(apiResponse.IsSuccess);

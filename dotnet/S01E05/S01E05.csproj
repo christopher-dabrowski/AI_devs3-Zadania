@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="OllamaSharp" />
+    <PackageReference Include="System.Linq.Async" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,4 +24,4 @@
     <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
 
-</Project> 
+</Project>
