@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -9,9 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HtmlAgilityPack" />
     <PackageReference Include="Microsoft.Extensions.Hosting" />
-    <PackageReference Include="OpenAI" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,4 +22,4 @@
     <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
 
-</Project>
+</Project> 
