@@ -1,7 +1,7 @@
 # Spis Treści
 
 - [Spis Treści](#spis-treści)
-- [AI_devs3-Zadania](#ai_devs3-zadania)
+- [AI\_devs3-Zadania](#ai_devs3-zadania)
   - [PreworkApi](#preworkapi)
   - [S01E01 — Interakcja z dużym modelem językowym](#s01e01--interakcja-z-dużym-modelem-językowym)
   - [S01E02 — Przygotowanie własnych danych dla modelu](#s01e02--przygotowanie-własnych-danych-dla-modelu)
@@ -84,14 +84,20 @@ Moje rozwiązanie to [definedTrackSolution](prompty/S01E04/definedTrackSolution.
 
 ## S01E05 — Produkcja
 
-W tym zadaniu przetwarzam pliki przy pomocy lokalnie uruchomionego modelu.
+W tym zadaniu należało wykorzystać lokalnie uruchomiony model językowy do anonimizacji tekstu poprzez ocenzurowanie wrażliwych danych (imion, nazwisk, nazw miast, ulic i wieku).
 
-Uruchomiłem w [Dockerze](https://www.docker.com/) narzędzie [ollama](https://ollama.com/).  
-Najpierw w terminalu pobawiłem się modelem llama31 w wersji 8b.
-Wygenerowałem sobie plan treningowy na siłownię 💪  
-Trochę to trwało, prawdopodobnie dlatego, że mój laptop nie ma dedykownego GPU.
+Moje rozwiązanie wykorzystało:
 
-Jeszcze nie zrobiłem, ale jeszcze tu wrócę ^^
+- Model llama2 uruchomiony lokalnie przez [ollama](https://ollama.com/) w kontenerze Docker
+- Dwuetapowe podejście do rozwiązania problemu:
+  1. Wykorzystanie modelu tylko do identyfikacji wrażliwych danych w tekście
+  2. Programistyczna zamiana zidentyfikowanych fragmentów na "[CENSORED]" przy pomocy prostych operacji na tekście
+
+Początkowo próbowałem rozwiązać problem jednym promptem, który miał zarówno identyfikować jak i zamieniać dane, ale model miał z tym problemy. Podzielenie zadania na dwa prostsze kroki znacząco poprawiło skuteczność rozwiązania.
+
+Interesująco było też to, że model początkowo odmawiał "cenzurowania" danych ze względów etycznych, ale zaakceptował zadanie gdy zostało ono przedstawione jako "anonimizacja" danych.
+
+Kod rozwiązania: [S01E05](./dotnet/S01E05/Program.cs)
 
 ## S02E01 — Audio i interfejs głosowy
 
