@@ -9,6 +9,7 @@
   - [S01E04 — Techniki optymalizacji](#s01e04--techniki-optymalizacji)
   - [S01E05 — Produkcja](#s01e05--produkcja)
   - [S02E01 — Audio i interfejs głosowy](#s02e01--audio-i-interfejs-głosowy)
+  - [S02E02 - Rozumienie obrazu i wideo](#s02e02---rozumienie-obrazu-i-wideo)
 
 # AI_devs3-Zadania
 
@@ -113,3 +114,22 @@ Mając gotowe transkrypcje również przy pomocy Cursor'a przeanalizowałem je i
 Mój prompt: [prompt.txt](python/S02E01/prompt.txt)
 
 Co ciekawe najpierw uruchmiłem go na modelu gpt-4o. Model ten dał znacznie gorszy wynik niż claude-3.5-sonnet.
+
+## S02E02 - Rozumienie obrazu i wideo
+
+Zadanie polegało na odnalezieniu miasta na podstawie czterech fragmentów mapy, z których jeden był celowo błędny. Wykorzystałem model gpt-4o do analizy obrazów i znalezienia odpowiedzi.
+
+Moje rozwiązanie: [S02E02](./dotnet/S02E02/Program.cs)
+
+W implementacji wykorzystałem:
+
+- OpenAI API z modelem gpt-4o do analizy obrazów map
+- Dwuetapowe podejście:
+  1. Analiza każdego fragmentu mapy osobno w celu wydobycia kluczowych informacji
+  2. Wygenerowanie zestawów map z jedną wykluczoną.
+  3. Połączenie informacji i identyfikacja niespójnego fragmentu w celu znalezienia właściwego miasta
+
+Na początku poróbowałem podać wszystkie fragmenty mapy, łącznie z błędnym do zapytania, nie dostałem jednak w ten sposób poprawnej odpowiedzi.
+Uznałem, ze skoro zapytania tekstowe są stosunkowo tanie i szybkie to mogę zrobić ich kilka, w każdym eliminując jeden z fragmentów mapy.
+
+Tym razem Cursor kiepsko radził sobie z pisaniem kodu do zapytań OpenAI. Mimo dodania do kontekstu dokumentacji musiałem samemu ją przeczytać i napisać poprawny kod.
