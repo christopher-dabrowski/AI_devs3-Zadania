@@ -10,4 +10,9 @@ public static class Prompts
 
         Focus only on the robot's appearance, not any other parts of the message.
         """;
+
+    public const string ConvertToImageGenerationPrompt =
+        """
+        Generate a DALL-E-3 prompt that will generate an image of the described robot.
+        """;
 }
