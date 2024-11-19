@@ -10,6 +10,7 @@
   - [S01E05 — Produkcja](#s01e05--produkcja)
   - [S02E01 — Audio i interfejs głosowy](#s02e01--audio-i-interfejs-głosowy)
   - [S02E02 - Rozumienie obrazu i wideo](#s02e02---rozumienie-obrazu-i-wideo)
+  - [S02E03 — Generowanie i modyfikacja obrazów](#s02e03--generowanie-i-modyfikacja-obrazów)
 
 # AI_devs3-Zadania
 
@@ -133,3 +134,18 @@ Na początku próbowałem podać wszystkie fragmenty mapy, łącznie z błędnym
 Uznałem, że skoro zapytania tekstowe są stosunkowo tanie i szybkie to mogę zrobić ich kilka, w każdym eliminując jeden z fragmentów mapy.
 
 Tym razem Cursor kiepsko radził sobie z pisaniem kodu do zapytań OpenAI. Mimo dodania do kontekstu dokumentacji musiałem samemu ją przeczytać i napisać poprawny kod.
+
+## S02E03 — Generowanie i modyfikacja obrazów
+
+Zadanie polegało na wygenerowaniu obrazu robota na podstawie chaotycznych zeznań osoby, która go widziała. Wykorzystałem do tego DALL-E 3 poprzez OpenAI API.
+
+Moje rozwiązanie: [S02E03](./dotnet/S02E03/Program.cs)
+
+W moim rozwiązaniu:
+
+1. Pobrałem zeznania świadka
+2. Przy pomocy LLM przekształciłem je na opis robota
+3. Wygenerowałem prompt do generacji obrazu
+4. Stworzyłem obraz robota
+
+Przy okazji rozwiązania tego zadania dowiedziałem się, że OpenAI pozwala wygenerować obraz, do którego pobrania otrzyma się URL. Dzięki temu nie musiałem samemu hostować pliku obrazu :D
