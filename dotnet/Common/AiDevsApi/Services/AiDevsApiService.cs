@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace Common.AiDevsApi.Services;
 
-public class AiDevsApiService : IAiDevsApiService
+internal class AiDevsApiService : IAiDevsApiService
 {
     public HttpClient HttpClient { get; }
     private readonly string _apiKey;
