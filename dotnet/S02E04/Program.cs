@@ -36,6 +36,8 @@ var taskAnswer = new TaskAnswer<TaskAnswerData>
     Task = "kategorie",
     Answer = new TaskAnswerData { People = people, Hardware = hardware },
 };
+Console.WriteLine(JsonSerializer.Serialize(taskAnswer));
+Console.WriteLine();
 
 var response = await sp.GetRequiredService<IAiDevsApiService>().VerifyTaskAnswerAsync(taskAnswer);
 Console.WriteLine(JsonSerializer.Serialize(response));
@@ -54,11 +56,12 @@ async IAsyncEnumerable<(string Name, string Content)> GetTextContents(string dir
     var audioFiles = Directory.EnumerateFiles(directory, "*.mp3", SearchOption.TopDirectoryOnly);
     foreach (var audioFile in audioFiles)
     {
-        var content = await cacheService.GetAsync(audioFile);
+        var cacheKey = Path.GetFileName(audioFile);
+        var content = await cacheService.GetAsync(cacheKey);
         if (content is null)
         {
             content = await GetAudioContent(audioFile);
-            await cacheService.SetAsync(audioFile, content);
+            await cacheService.SetAsync(cacheKey, content);
         }
 
         yield return (Path.GetFileName(audioFile), content);
@@ -67,11 +70,12 @@ async IAsyncEnumerable<(string Name, string Content)> GetTextContents(string dir
     var imageFiles = Directory.EnumerateFiles(directory, "*.png", SearchOption.TopDirectoryOnly);
     foreach (var imageFile in imageFiles)
     {
-        var content = await cacheService.GetAsync(imageFile);
+        var cacheKey = Path.GetFileName(imageFile);
+        var content = await cacheService.GetAsync(cacheKey);
         if (content is null)
         {
             content = await GetImageContent(imageFile);
-            await cacheService.SetAsync(imageFile, content);
+            await cacheService.SetAsync(cacheKey, content);
         }
 
         yield return (Path.GetFileName(imageFile), content);
