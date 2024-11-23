@@ -16,7 +16,7 @@ builder.Services
     .AddAiDevsApi()
     .AddOpenAIClient()
     .AddOpenAIChatClient()
-    .AddCacheService();
+    .AddFileCacheService();
 
 var host = builder.Build();
 await using var scope = host.Services.CreateAsyncScope();

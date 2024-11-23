@@ -6,10 +6,16 @@ namespace Common.Cache.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddCacheService(this IServiceCollection services)
+    public static IServiceCollection AddFileCacheService(
+        this IServiceCollection services,
+        string? customCacheDirectory = null)
     {
-        services.AddSingleton<ICacheService>(sp =>
-            new CacheService(AppContext.BaseDirectory));
-        return services;
+        var cacheDirectory = customCacheDirectory ??
+            Path.Combine(AppContext.BaseDirectory, "Resources", "Cache");
+
+        Directory.CreateDirectory(cacheDirectory);
+
+        return services
+        .AddSingleton<ICacheService>(sp => new FileCacheService(cacheDirectory));
     }
 }

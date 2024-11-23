@@ -2,14 +2,13 @@ using Common.Cache.Contracts;
 
 namespace Common.Cache.Services;
 
-public class CacheService : ICacheService
+public class FileCacheService : ICacheService
 {
-    private readonly string cacheDirectory;
+    private readonly string _cacheDirectory;
 
-    public CacheService(string baseDirectory)
+    public FileCacheService(string cacheDirectory)
     {
-        cacheDirectory = Path.Combine(baseDirectory, "Resources", "Cache");
-        Directory.CreateDirectory(cacheDirectory);
+        _cacheDirectory = cacheDirectory;
     }
 
     public async Task<string?> GetAsync(string key)
@@ -35,5 +34,5 @@ public class CacheService : ICacheService
     }
 
     private string GetCacheFilePath(string key) =>
-        Path.Combine(cacheDirectory, $"{key}.cache");
+        Path.Combine(_cacheDirectory, $"{key}.cache");
 }
