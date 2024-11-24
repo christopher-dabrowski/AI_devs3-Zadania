@@ -1,7 +1,7 @@
 # Spis Treści
 
 - [Spis Treści](#spis-treści)
-- [AI\_devs3-Zadania](#ai_devs3-zadania)
+- [AI_devs3-Zadania](#ai_devs3-zadania)
   - [PreworkApi](#preworkapi)
   - [S01E01 — Interakcja z dużym modelem językowym](#s01e01--interakcja-z-dużym-modelem-językowym)
   - [S01E02 — Przygotowanie własnych danych dla modelu](#s01e02--przygotowanie-własnych-danych-dla-modelu)
@@ -11,6 +11,7 @@
   - [S02E01 — Audio i interfejs głosowy](#s02e01--audio-i-interfejs-głosowy)
   - [S02E02 - Rozumienie obrazu i wideo](#s02e02---rozumienie-obrazu-i-wideo)
   - [S02E03 — Generowanie i modyfikacja obrazów](#s02e03--generowanie-i-modyfikacja-obrazów)
+  - [S02E04 — Połączenie wielu formatów](#s02e04--połączenie-wielu-formatów)
 
 # AI_devs3-Zadania
 
@@ -149,3 +150,27 @@ W moim rozwiązaniu:
 4. Stworzyłem obraz robota
 
 Przy okazji rozwiązania tego zadania dowiedziałem się, że OpenAI pozwala wygenerować obraz, do którego pobrania otrzyma się URL. Dzięki temu nie musiałem samemu hostować pliku obrazu :D
+
+## S02E04 — Połączenie wielu formatów
+
+Celem zadania było znalezienie raportów zawierające informacje o schwytanych ludziach lub o śladach ich obecności oraz o naprawionych usterkach hardwarowych, oraz przygotowanie listy tylko tych dotyczących schwytanych ludzi, oraz oddzielnie tych, które dotyczyły usterek.
+Dane w raportach były w formatach tekstowych, audio oraz graficznych.
+
+Główny kod: [S02E04](./dotnet/S02E04/Program.cs)
+Moje prompty: [Prompts](./dotnet/S02E04/Prompts.cs)
+
+Rozwiązałem zadanie następująco:
+
+1. Przekształciłem dane do formatu tekstowego
+   - text — bez transformacji
+   - audio — transkrypcja modelem _Whisper_
+   - zdjęcia — ekstrakcja tekstu za pomocą _gpt-4o_
+2. Użyłem modelu _gpt-4o_ do analizy raportów i kategoryzacji ich na:
+   - raporty o schwytanych ludziach
+   - raporty o usterkach technicznych
+   - pozostałe
+3. Przygotowałem odpowiedź w wymaganym formacie JSON
+
+Dodatkowo zaimplementowałem cache dla transformacji obrazów i audio. Dzięki temu nie musiałem powtarzać tych kosztownych operacji przy dopracowywaniu aplikacji oraz miałem łatwy wgląd w ich postać tekstową.
+
+Rozwiązanie pokazuje, jak skutecznie można łączyć różne modele AI do przetwarzania danych w różnych formatach oraz jak ważna jest optymalizacja w przypadku kosztownych operacji AI.
