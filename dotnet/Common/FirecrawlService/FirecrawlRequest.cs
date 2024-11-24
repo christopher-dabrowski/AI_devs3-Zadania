@@ -11,7 +11,7 @@ public record FirecrawlRequest
     public string[]? Formats { get; init; }
 
     [JsonPropertyName("onlyMainContent")]
-    public bool OnlyMainContent { get; init; }
+    public bool? OnlyMainContent { get; init; }
 
     [JsonPropertyName("includeTags")]
     public string[]? IncludeTags { get; init; }
@@ -44,7 +44,7 @@ public record FirecrawlRequest
 public record LocationSettings
 {
     [JsonPropertyName("country")]
-    public string Country { get; init; }
+    public required string Country { get; init; }
 
     [JsonPropertyName("languages")]
     public string[]? Languages { get; init; }

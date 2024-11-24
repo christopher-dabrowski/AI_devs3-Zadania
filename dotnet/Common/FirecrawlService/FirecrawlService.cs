@@ -1,3 +1,6 @@
+using System.Text;
+using System.Text.Json;
+
 namespace Common.FirecrawlService;
 
 using System.Net.Http.Headers;
@@ -18,7 +21,15 @@ public class FirecrawlService : IFirecrawlService
 
     public async Task<FirecrawlResponse> ScrapeAsync(FirecrawlRequest request, CancellationToken cancellationToken = default)
     {
-        var response = await _httpClient.PostAsJsonAsync("scrape", request, cancellationToken);
+        var serializationOptions = new JsonSerializerOptions
+        {
+            DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
+        };
+
+        var serializedRequest = JsonSerializer.Serialize(request, serializationOptions);
+        var content = new StringContent(serializedRequest, Encoding.UTF8, "application/json");
+
+        var response = await _httpClient.PostAsync("/v1/scrape", content, cancellationToken);
         response.EnsureSuccessStatusCode();
 
         return await response.Content.ReadFromJsonAsync<FirecrawlResponse>(cancellationToken: cancellationToken)

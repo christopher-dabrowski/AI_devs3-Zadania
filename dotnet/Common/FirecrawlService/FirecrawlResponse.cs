@@ -8,7 +8,7 @@ public record FirecrawlResponse
     public bool Success { get; init; }
 
     [JsonPropertyName("data")]
-    public FirecrawlData Data { get; init; }
+    public required FirecrawlData Data { get; init; }
 }
 
 public record FirecrawlData
