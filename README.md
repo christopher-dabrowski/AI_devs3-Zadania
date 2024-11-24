@@ -35,6 +35,8 @@ Chciałbym częściej używać do nich AI.
 
 ## S01E01 — Interakcja z dużym modelem językowym
 
+![Zdobyta flaga zadania S01E01](./.attachments/Flag_S01E01.png =150x)
+
 Zadanie polegało na automatyzacji procesu logowania z użyciem AI do rozwiązywania pytań ANTY CAPTCHA - to jak CAPTCHA, ale może je przejść tylko robot 🤖.
 
 Moje rozwiązanie: [S01E01](./dotnet/S01E01/Program.cs)
@@ -51,6 +53,8 @@ Ciekawe było wykorzystanie System Message w OpenAI API, który wymusza zwracani
 
 ## S01E02 — Przygotowanie własnych danych dla modelu
 
+![Zdobyta flaga zadania S01E02](./.attachments/Flag_S01E02.png =150x)
+
 Zadanie polegało na wykorzystaniu modelu językowego do przetwarzania i analizy wiadomości w dwóch krokach.
 
 Moje rozwiązanie: [S01E02](./dotnet/S01E02/Program.cs)
@@ -64,6 +68,8 @@ W implementacji zastosowałem ciekawe podejście wykorzystujące sekwencyjne po�
 To doświadczenie pokazało, jak skuteczne może być łączenie różnych technik prompt engineeringu oraz wykorzystanie narzędzi AI do wspomagania procesu programowania.
 
 ## S01E03 — Limity Dużych Modeli językowych i API
+
+![Zdobyta flaga zadania S01E03](./.attachments/Flag_S01E03.png =150x)
 
 Zadanie polegało na analizie dużego pliku z pytaniami i poprawienie w nim błędów.
 
@@ -79,6 +85,8 @@ To pokazuje, jak ważne jest odpowiednie rozdzielenie zadań między tradycyjne 
 
 ## S01E04 — Techniki optymalizacji
 
+![Zdobyta flaga zadania S01E04](./.attachments/Flag_S01E04.png =150x)
+
 Zadanie polegało na napisaniu promptu, który nakieruje robota do celu, omijając przeszkody.
 Wykorzystanie do tego LLM okazało się zaskakująco trudne.
 Na początku próbowałem zrobić to bez wyznaczania konkretnej trasy modelowi, jednak bez skutku.
@@ -86,6 +94,8 @@ Na razie roziwąwiązałem to zadanie w łatwiejszej wersji, gdzie model miał p
 Moje rozwiązanie to [definedTrackSolution](prompty/S01E04/definedTrackSolution.txt).
 
 ## S01E05 — Produkcja
+
+![Zdobyta flaga zadania S01E05](./.attachments/Flag_S01E05.png =150x)
 
 W tym zadaniu należało wykorzystać lokalnie uruchomiony model językowy do anonimizacji tekstu poprzez ocenzurowanie wrażliwych danych (imion, nazwisk, nazw miast, ulic i wieku).
 
@@ -104,6 +114,8 @@ Kod rozwiązania: [S01E05](./dotnet/S01E05/Program.cs)
 
 ## S02E01 — Audio i interfejs głosowy
 
+![Zdobyta flaga zadania S02E01](./.attachments/Flag_S02E01.png =150x)
+
 Zadanie polegało na wygenerowaniu transkrypcji z plików audio z zeznaniami świadków oraz wykorzystanie modelu do przeanalizowania ich w celu ustalenia pewnego konkretnego adresu.
 
 Tym razem dla odmiany zdecydowałem się użyć pythona.
@@ -118,6 +130,8 @@ Mój prompt: [prompt.txt](python/S02E01/prompt.txt)
 Co ciekawe najpierw uruchmiłem go na modelu gpt-4o. Model ten dał znacznie gorszy wynik niż claude-3.5-sonnet.
 
 ## S02E02 - Rozumienie obrazu i wideo
+
+![Zdobyta flaga zadania S02E02](./.attachments/Flag_S02E02.png =150x)
 
 Zadanie polegało na odnalezieniu miasta na podstawie czterech fragmentów mapy, z których jeden był celowo błędny. Wykorzystałem model gpt-4o do analizy obrazów i znalezienia odpowiedzi.
 
@@ -138,6 +152,8 @@ Tym razem Cursor kiepsko radził sobie z pisaniem kodu do zapytań OpenAI. Mimo 
 
 ## S02E03 — Generowanie i modyfikacja obrazów
 
+![Zdobyta flaga zadania S02E03](./.attachments/Flag_S02E03.png =150x)
+
 Zadanie polegało na wygenerowaniu obrazu robota na podstawie chaotycznych zeznań osoby, która go widziała. Wykorzystałem do tego DALL-E 3 poprzez OpenAI API.
 
 Moje rozwiązanie: [S02E03](./dotnet/S02E03/Program.cs)
@@ -152,6 +168,8 @@ W moim rozwiązaniu:
 Przy okazji rozwiązania tego zadania dowiedziałem się, że OpenAI pozwala wygenerować obraz, do którego pobrania otrzyma się URL. Dzięki temu nie musiałem samemu hostować pliku obrazu :D
 
 ## S02E04 — Połączenie wielu formatów
+
+![Zdobyta flaga zadania S02E04](./.attachments/Flag_S02E04.png =150x)
 
 Celem zadania było znalezienie raportów zawierające informacje o schwytanych ludziach lub o śladach ich obecności oraz o naprawionych usterkach hardwarowych, oraz przygotowanie listy tylko tych dotyczących schwytanych ludzi, oraz oddzielnie tych, które dotyczyły usterek.
 Dane w raportach były w formatach tekstowych, audio oraz graficznych.
