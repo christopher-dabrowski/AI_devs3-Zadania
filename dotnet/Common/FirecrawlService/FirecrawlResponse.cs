@@ -1,13 +1,33 @@
+using System.Text.Json.Serialization;
+
 namespace Common.FirecrawlService;
 
-public record FirecrawlResponse(
-    bool Success,
-    FirecrawlData Data);
+public record FirecrawlResponse
+{
+    [JsonPropertyName("success")]
+    public bool Success { get; init; }
 
-public record FirecrawlData(
-    string? Markdown,
-    string? Html,
-    string? RawHtml,
-    string[]? Links,
-    string? Screenshot,
-    object? Extract);
+    [JsonPropertyName("data")]
+    public FirecrawlData Data { get; init; }
+}
+
+public record FirecrawlData
+{
+    [JsonPropertyName("markdown")]
+    public string? Markdown { get; init; }
+
+    [JsonPropertyName("html")]
+    public string? Html { get; init; }
+
+    [JsonPropertyName("rawHtml")]
+    public string? RawHtml { get; init; }
+
+    [JsonPropertyName("links")]
+    public string[]? Links { get; init; }
+
+    [JsonPropertyName("screenshot")]
+    public string? Screenshot { get; init; }
+
+    [JsonPropertyName("extract")]
+    public object? Extract { get; init; }
+}
