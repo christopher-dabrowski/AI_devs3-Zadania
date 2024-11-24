@@ -3,8 +3,11 @@ using Common.Cache.Contracts;
 using Common.Cache.Extensions;
 using Common.FirecrawlService;
 using Common.FirecrawlService.Extensions;
+using OpenAI.Chat;
 using S02E05;
 using S02E05.Models;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 
 var builder = Host.CreateApplicationBuilder(args);
 
@@ -14,19 +17,84 @@ var host = builder.Build();
 await using var scope = host.Services.CreateAsyncScope();
 var sp = scope.ServiceProvider;
 
-var article = await GetArticleContent(sp);
+var article = await GetArticleContent();
 
 var images = MarkdownParser.FindImages(article).ToList();
-foreach (var image in images)
+var modifiedArticle = await ReplaceImagesWithDescriptions(article);
+Console.WriteLine(modifiedArticle);
+
+async Task<string> ReplaceImagesWithDescriptions(string content)
 {
-    Console.WriteLine($"Image at positions {image.StartIndex}-{image.EndIndex}: {image.ImageUrl}");
+    var images = MarkdownParser.FindImages(content).ToImmutableArray();
+    foreach (var image in images.OrderByDescending(x => x.StartIndex))
+    {
+        var imageBytes = await DownloadImage(image.ImageUrl);
+        var description = await DescribeImage(imageBytes, Path.GetFileName(image.ImageUrl));
+
+        var structuredDescription =
+        $"""
+        <image>
+        {description}
+        </image>\n
+        """;
+
+        content = content[..image.StartIndex] + structuredDescription + content[image.EndIndex..];
+    }
+
+    return content;
 }
 
-// Console.WriteLine(article);
+async Task<byte[]> DownloadImage(string url)
+{
+    var cacheService = sp.GetRequiredService<ICacheService>();
+    var cacheKey = url.Replace("/", "_");
 
+    var cachedImage = await cacheService.GetAsyncBytes(cacheKey);
+    if (cachedImage is not null)
+        return cachedImage;
 
+    var taskOptions = sp.GetRequiredService<IOptions<S02E05Options>>().Value;
+    var httpClientFactory = sp.GetRequiredService<IHttpClientFactory>();
+    var httpClient = httpClientFactory.CreateClient();
+    httpClient.BaseAddress = new Uri(taskOptions.DataUrl);
 
-static async Task<string> GetArticleContent(IServiceProvider sp)
+    var response = await httpClient.GetAsync(url);
+    response.EnsureSuccessStatusCode();
+
+    var imageBytes = await response.Content.ReadAsByteArrayAsync();
+
+    await cacheService.SetAsyncBytes(cacheKey, imageBytes);
+    return imageBytes;
+}
+
+async Task<string> DescribeImage(byte[] imageBytes, string imageName, string mimeType = "image/png")
+{
+    var cacheService = sp.GetRequiredService<ICacheService>();
+    var cacheKey = $"description_{imageName}";
+
+    var cachedDescription = await cacheService.GetAsync(cacheKey);
+    if (cachedDescription is not null)
+        return cachedDescription;
+
+    var chatClient = sp.GetRequiredService<ChatClient>();
+    var binaryData = BinaryData.FromBytes(imageBytes);
+
+    List<ChatMessage> messages =
+    [
+        new SystemChatMessage(Prompts.SystemDescribeImage),
+        new UserChatMessage(
+            ChatMessageContentPart.CreateTextPart(Prompts.UserDescribeImage),
+            ChatMessageContentPart.CreateImagePart(binaryData, mimeType))
+    ];
+
+    var response = await chatClient.CompleteChatAsync(messages);
+    var description = response.Value.Content[0].Text;
+
+    await cacheService.SetAsync(cacheKey, description);
+    return description;
+}
+
+async Task<string> GetArticleContent()
 {
     var cacheService = sp.GetRequiredService<ICacheService>();
     var cacheKey = $"article";

@@ -1,6 +1,7 @@
 using Common.AiDevsApi.Extensions;
 using Common.Cache.Extensions;
 using Common.FirecrawlService.Extensions;
+using Common.OpenAI;
 using S02E05.Models;
 
 namespace S02E05;
@@ -14,9 +15,12 @@ public static class ServiceCollectionExtensions
             .ValidateDataAnnotations();
 
         services
+            .AddHttpClient()
             .AddAiDevsApi()
             .AddFileCacheService()
-            .AddFirecrawl();
+            .AddFirecrawl()
+            .AddOpenAIChatClient()
+            .AddOpenAIClient();
 
         return services;
     }

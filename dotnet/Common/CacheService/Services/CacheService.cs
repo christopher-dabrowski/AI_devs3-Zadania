@@ -21,10 +21,26 @@ public class FileCacheService : ICacheService
         return await File.ReadAllTextAsync(filePath);
     }
 
+    public async Task<byte[]?> GetAsyncBytes(string key)
+    {
+        var filePath = GetCacheFilePath(key);
+
+        if (!File.Exists(filePath))
+            return null;
+
+        return await File.ReadAllBytesAsync(filePath);
+    }
+
     public async Task SetAsync(string key, string data)
     {
         var filePath = GetCacheFilePath(key);
         await File.WriteAllTextAsync(filePath, data);
+    }
+
+    public async Task SetAsyncBytes(string key, byte[] data)
+    {
+        var filePath = GetCacheFilePath(key);
+        await File.WriteAllBytesAsync(filePath, data);
     }
 
     public Task<bool> ExistsAsync(string key)
