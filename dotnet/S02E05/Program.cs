@@ -16,7 +16,15 @@ var sp = scope.ServiceProvider;
 
 var article = await GetArticleContent(sp);
 
-Console.WriteLine(article);
+var images = MarkdownParser.FindImages(article).ToList();
+foreach (var image in images)
+{
+    Console.WriteLine($"Image at positions {image.StartIndex}-{image.EndIndex}: {image.ImageUrl}");
+}
+
+// Console.WriteLine(article);
+
+
 
 static async Task<string> GetArticleContent(IServiceProvider sp)
 {
