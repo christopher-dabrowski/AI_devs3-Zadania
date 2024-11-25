@@ -1,12 +1,10 @@
-using Common.AiDevsApi.Extensions;
 using Common.Cache.Contracts;
-using Common.Cache.Extensions;
 using Common.FirecrawlService;
-using Common.FirecrawlService.Extensions;
+using OpenAI;
+using OpenAI.Audio;
 using OpenAI.Chat;
 using S02E05;
 using S02E05.Models;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 
 var builder = Host.CreateApplicationBuilder(args);
@@ -21,6 +19,7 @@ var article = await GetArticleContent();
 
 var images = MarkdownParser.FindImages(article).ToList();
 var modifiedArticle = await ReplaceImagesWithDescriptions(article);
+modifiedArticle = await ReplaceAudioWithTranscriptions(modifiedArticle);
 Console.WriteLine(modifiedArticle);
 
 async Task<string> ReplaceImagesWithDescriptions(string content)
@@ -35,10 +34,33 @@ async Task<string> ReplaceImagesWithDescriptions(string content)
         $"""
         <image>
         {description}
-        </image>\n
+        </image>
+        
         """;
 
         content = content[..image.StartIndex] + structuredDescription + content[image.EndIndex..];
+    }
+
+    return content;
+}
+
+async Task<string> ReplaceAudioWithTranscriptions(string content)
+{
+    var audioFiles = MarkdownParser.FindAudioFiles(content).ToImmutableArray();
+    foreach (var audio in audioFiles.OrderByDescending(x => x.StartIndex))
+    {
+        var audioBytes = await DownloadAudio(audio.AudioUrl);
+        var transcription = await TranscribeAudio(audioBytes, Path.GetFileName(audio.AudioUrl));
+
+        var structuredTranscription =
+        $"""
+        <audio name="{audio.Description}">
+        {transcription}
+        </audio>
+
+        """;
+
+        content = content[..audio.StartIndex] + structuredTranscription + content[audio.EndIndex..];
     }
 
     return content;
@@ -92,6 +114,55 @@ async Task<string> DescribeImage(byte[] imageBytes, string imageName, string mim
 
     await cacheService.SetAsync(cacheKey, description);
     return description;
+}
+
+async Task<byte[]> DownloadAudio(string url)
+{
+    var cacheService = sp.GetRequiredService<ICacheService>();
+    var cacheKey = $"audio_{url.Replace("/", "_")}";
+
+    var cachedAudio = await cacheService.GetAsyncBytes(cacheKey);
+    if (cachedAudio is not null)
+        return cachedAudio;
+
+    var taskOptions = sp.GetRequiredService<IOptions<S02E05Options>>().Value;
+    var httpClientFactory = sp.GetRequiredService<IHttpClientFactory>();
+    var httpClient = httpClientFactory.CreateClient();
+    httpClient.BaseAddress = new Uri(taskOptions.DataUrl);
+
+    var response = await httpClient.GetAsync(url);
+    response.EnsureSuccessStatusCode();
+
+    var audioBytes = await response.Content.ReadAsByteArrayAsync();
+
+    await cacheService.SetAsyncBytes(cacheKey, audioBytes);
+    return audioBytes;
+}
+
+async Task<string> TranscribeAudio(byte[] audioBytes, string audioName)
+{
+    var cacheService = sp.GetRequiredService<ICacheService>();
+    var cacheKey = $"transcription_{audioName}";
+
+    var cachedTranscription = await cacheService.GetAsync(cacheKey);
+    if (cachedTranscription is not null)
+        return cachedTranscription;
+
+    var audioClient = sp.GetRequiredService<OpenAIClient>().GetAudioClient("whisper-1");
+
+    AudioTranscriptionOptions options = new()
+    {
+        ResponseFormat = AudioTranscriptionFormat.Simple,
+        Language = "pl",
+    };
+
+    using var audioStream = new MemoryStream(audioBytes);
+
+    var response = await audioClient.TranscribeAudioAsync(audioStream, audioName, options);
+    var transcription = response.Value.Text;
+
+    await cacheService.SetAsync(cacheKey, transcription);
+    return transcription;
 }
 
 async Task<string> GetArticleContent()
