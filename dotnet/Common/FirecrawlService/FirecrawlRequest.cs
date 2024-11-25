@@ -5,7 +5,7 @@ namespace Common.FirecrawlService;
 public record FirecrawlRequest
 {
     [JsonPropertyName("url")]
-    public string Url { get; init; }
+    public required string Url { get; init; }
 
     [JsonPropertyName("formats")]
     public string[]? Formats { get; init; }

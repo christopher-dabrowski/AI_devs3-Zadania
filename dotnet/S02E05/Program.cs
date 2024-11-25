@@ -9,6 +9,7 @@ using S02E05;
 using S02E05.Models;
 using System.Collections.Immutable;
 using System.Text.Json.Nodes;
+using S02E05.Services;
 
 var builder = Host.CreateApplicationBuilder(args);
 
@@ -20,7 +21,6 @@ var sp = scope.ServiceProvider;
 
 var article = await GetArticleContent();
 
-var images = MarkdownParser.FindImages(article).ToList();
 var modifiedArticle = await ReplaceImagesWithDescriptions(article);
 modifiedArticle = await ReplaceAudioWithTranscriptions(modifiedArticle);
 

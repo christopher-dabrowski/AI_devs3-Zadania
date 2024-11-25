@@ -1,5 +1,6 @@
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
+
+namespace S02E05.Services;
 
 public static partial class MarkdownParser
 {

@@ -63,7 +63,9 @@ async Task<string> HybridApproach(string uncensoredText)
     return censoredText.ToString();
 }
 
+#pragma warning disable CS8321 // Local function is declared but never used
 async Task<string> FullLlmApproach(string uncensoredText)
+#pragma warning restore CS8321 // Local function is declared but never used
 {
     var request = new GenerateRequest()
     {
