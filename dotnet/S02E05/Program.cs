@@ -1,3 +1,5 @@
+using Common.AiDevsApi.Contracts;
+using Common.AiDevsApi.Models;
 using Common.Cache.Contracts;
 using Common.FirecrawlService;
 using OpenAI;
@@ -6,6 +8,7 @@ using OpenAI.Chat;
 using S02E05;
 using S02E05.Models;
 using System.Collections.Immutable;
+using System.Text.Json.Nodes;
 
 var builder = Host.CreateApplicationBuilder(args);
 
@@ -20,7 +23,48 @@ var article = await GetArticleContent();
 var images = MarkdownParser.FindImages(article).ToList();
 var modifiedArticle = await ReplaceImagesWithDescriptions(article);
 modifiedArticle = await ReplaceAudioWithTranscriptions(modifiedArticle);
-Console.WriteLine(modifiedArticle);
+
+var questions = await FetchQuestions();
+var answers = await AnswerQuestions(questions, modifiedArticle);
+
+Console.WriteLine(answers);
+
+var aiDevsApiService = sp.GetRequiredService<IAiDevsApiService>();
+var taskAnswer = new TaskAnswer<JsonObject>
+{
+    Task = "arxiv",
+    Answer = answers,
+};
+var response = await aiDevsApiService.VerifyTaskAnswerAsync(taskAnswer);
+
+Console.WriteLine(response);
+
+async Task<JsonObject> AnswerQuestions(string questions, string modifiedArticle)
+{
+    var chatClient = sp.GetRequiredService<ChatClient>();
+
+    List<ChatMessage> messages =
+    [
+        new SystemChatMessage(Prompts.AnswerQuestionsBasedOnKnowledge(modifiedArticle)),
+        new UserChatMessage(ChatMessageContentPart.CreateTextPart(questions))
+    ];
+
+    var response = await chatClient.CompleteChatAsync(messages);
+    return JsonNode.Parse(response.Value.Content[0].Text) as JsonObject
+        ?? throw new InvalidOperationException("Answer is not a JSON object");
+}
+
+async Task<string> FetchQuestions()
+{
+    var aiDevsHttpClient = sp.GetRequiredService<IAiDevsApiService>().HttpClient;
+    var aiDevsApiKey = sp.GetRequiredService<IOptions<AiDevsApiOptions>>().Value.ApiKey;
+
+    var response = await aiDevsHttpClient.GetAsync($"data/{aiDevsApiKey}/arxiv.txt");
+    response.EnsureSuccessStatusCode();
+
+    var content = await response.Content.ReadAsStringAsync();
+    return content;
+}
 
 async Task<string> ReplaceImagesWithDescriptions(string content)
 {
@@ -35,7 +79,7 @@ async Task<string> ReplaceImagesWithDescriptions(string content)
         <image>
         {description}
         </image>
-        
+
         """;
 
         content = content[..image.StartIndex] + structuredDescription + content[image.EndIndex..];
