@@ -36,7 +36,7 @@ Chciałbym częściej używać do nich AI.
 
 ## S01E01 — Interakcja z dużym modelem językowym
 
-![Zdobyta flaga zadania S01E01](/attachments/Flag_S01E01.png =150x)
+<img src="./.attachments/Flag_S01E01.png" width="150" alt="Zdobyta flaga zadania S01E01">
 
 Zadanie polegało na automatyzacji procesu logowania z użyciem AI do rozwiązywania pytań ANTY CAPTCHA - to jak CAPTCHA, ale może je przejść tylko robot 🤖.
 
@@ -54,7 +54,7 @@ Ciekawe było wykorzystanie System Message w OpenAI API, który wymusza zwracani
 
 ## S01E02 — Przygotowanie własnych danych dla modelu
 
-![Zdobyta flaga zadania S01E02](/attachments/Flag_S01E02.png =150x)
+<img src="./.attachments/Flag_S01E02.png" width="150" alt="Zdobyta flaga zadania S01E02">
 
 Zadanie polegało na wykorzystaniu modelu językowego do przetwarzania i analizy wiadomości w dwóch krokach.
 
@@ -70,7 +70,7 @@ To doświadczenie pokazało, jak skuteczne może być łączenie różnych techn
 
 ## S01E03 — Limity Dużych Modeli językowych i API
 
-![Zdobyta flaga zadania S01E03](/attachments/Flag_S01E03.png =150x)
+<img src="./.attachments/Flag_S01E03.png" width="150" alt="Zdobyta flaga zadania S01E03">
 
 Zadanie polegało na analizie dużego pliku z pytaniami i poprawienie w nim błędów.
 
@@ -86,7 +86,7 @@ To pokazuje, jak ważne jest odpowiednie rozdzielenie zadań między tradycyjne 
 
 ## S01E04 — Techniki optymalizacji
 
-![Zdobyta flaga zadania S01E04](/attachments/Flag_S01E04.png =150x)
+<img src="./.attachments/Flag_S01E04.png" width="150" alt="Zdobyta flaga zadania S01E04">
 
 Zadanie polegało na napisaniu promptu, który nakieruje robota do celu, omijając przeszkody.
 Wykorzystanie do tego LLM okazało się zaskakująco trudne.
@@ -96,7 +96,7 @@ Moje rozwiązanie to [definedTrackSolution](prompty/S01E04/definedTrackSolution.
 
 ## S01E05 — Produkcja
 
-![Zdobyta flaga zadania S01E05](/attachments/Flag_S01E05.png =150x)
+<img src="./.attachments/Flag_S01E05.png" width="150" alt="Zdobyta flaga zadania S01E05">
 
 W tym zadaniu należało wykorzystać lokalnie uruchomiony model językowy do anonimizacji tekstu poprzez ocenzurowanie wrażliwych danych (imion, nazwisk, nazw miast, ulic i wieku).
 
@@ -115,7 +115,7 @@ Kod rozwiązania: [S01E05](./dotnet/S01E05/Program.cs)
 
 ## S02E01 — Audio i interfejs głosowy
 
-![Zdobyta flaga zadania S02E01](/attachments/Flag_S02E01.png =150x)
+<img src="./.attachments/Flag_S02E01.png" width="150" alt="Zdobyta flaga zadania S02E01">
 
 Zadanie polegało na wygenerowaniu transkrypcji z plików audio z zeznaniami świadków oraz wykorzystanie modelu do przeanalizowania ich w celu ustalenia pewnego konkretnego adresu.
 
@@ -132,7 +132,7 @@ Co ciekawe najpierw uruchmiłem go na modelu gpt-4o. Model ten dał znacznie gor
 
 ## S02E02 - Rozumienie obrazu i wideo
 
-![Zdobyta flaga zadania S02E02](/attachments/Flag_S02E02.png =150x)
+<img src="./.attachments/Flag_S02E02.png" width="150" alt="Zdobyta flaga zadania S02E02">
 
 Zadanie polegało na odnalezieniu miasta na podstawie czterech fragmentów mapy, z których jeden był celowo błędny. Wykorzystałem model gpt-4o do analizy obrazów i znalezienia odpowiedzi.
 
@@ -153,7 +153,7 @@ Tym razem Cursor kiepsko radził sobie z pisaniem kodu do zapytań OpenAI. Mimo 
 
 ## S02E03 — Generowanie i modyfikacja obrazów
 
-![Zdobyta flaga zadania S02E03](/attachments/Flag_S02E03.png =150x)
+<img src="./.attachments/Flag_S02E03.png" width="150" alt="Zdobyta flaga zadania S02E03">
 
 Zadanie polegało na wygenerowaniu obrazu robota na podstawie chaotycznych zeznań osoby, która go widziała. Wykorzystałem do tego DALL-E 3 poprzez OpenAI API.
 
@@ -170,7 +170,7 @@ Przy okazji rozwiązania tego zadania dowiedziałem się, że OpenAI pozwala wyg
 
 ## S02E04 — Połączenie wielu formatów
 
-![Zdobyta flaga zadania S02E04](/attachments/Flag_S02E04.png =150x)
+<img src="./.attachments/Flag_S02E04.png" width="150" alt="Zdobyta flaga zadania S02E04">
 
 Celem zadania było znalezienie raportów zawierające informacje o schwytanych ludziach lub o śladach ich obecności oraz o naprawionych usterkach hardwarowych, oraz przygotowanie listy tylko tych dotyczących schwytanych ludzi, oraz oddzielnie tych, które dotyczyły usterek.
 Dane w raportach były w formatach tekstowych, audio oraz graficznych.
@@ -196,7 +196,7 @@ Rozwiązanie pokazuje, jak skutecznie można łączyć różne modele AI do prze
 
 ## S02E05 — Multimodalność w praktyce
 
-![Zdobyta flaga zadania S02E05](/attachments/Flag_S02E05.png =150x)
+<img src="./.attachments/Flag_S02E05.png" width="150" alt="Zdobyta flaga zadania S02E05">
 
 Celem zadania było autonomicznie odpowiedzenie na pytania na podstawie informacji z artykułu internetowego.  
 Częścią wyzwania było to, że artykuł, jak to strony w internecie, był w formacie HTML z linkami do zdjęć i plików audio.
@@ -212,4 +212,4 @@ Moje rozwiązanie wykorzystuje:
 - Cache'owanie opisów zdjęć i transkrypcjach, żeby uniknąć powtarzania tych operacji
 - GPT-4o do odpwiedzi na pytania na podstawie wiedzy z przygotowanego artykułu
 
-Celowo przekonwertowałem artykuł na format Markdown przed przesłaniem go do modelu. Ten format dalej lepsze wyniki niż treść w HTMLu.
+Celowo przekonwertowałem artykuł na format Markdown przed przesłaniem go do modelu. Ten format dalej lepsze wyniki niż treść w HTMLu.
