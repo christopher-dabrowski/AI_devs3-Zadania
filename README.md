@@ -12,6 +12,7 @@
   - [S02E02 - Rozumienie obrazu i wideo](#s02e02---rozumienie-obrazu-i-wideo)
   - [S02E03 — Generowanie i modyfikacja obrazów](#s02e03--generowanie-i-modyfikacja-obrazów)
   - [S02E04 — Połączenie wielu formatów](#s02e04--połączenie-wielu-formatów)
+  - [S02E05 — Multimodalność w praktyce](#s02e05--multimodalność-w-praktyce)
 
 # AI_devs3-Zadania
 
@@ -90,7 +91,7 @@ To pokazuje, jak ważne jest odpowiednie rozdzielenie zadań między tradycyjne 
 Zadanie polegało na napisaniu promptu, który nakieruje robota do celu, omijając przeszkody.
 Wykorzystanie do tego LLM okazało się zaskakująco trudne.
 Na początku próbowałem zrobić to bez wyznaczania konkretnej trasy modelowi, jednak bez skutku.
-Na razie roziwąwiązałem to zadanie w łatwiejszej wersji, gdzie model miał podążać za z góry ustaloną trasą.
+Na razie roziwąwiązałem to zadanie w łatwiejszej wersji, gdzie model miał pod��żać za z góry ustaloną trasą.
 Moje rozwiązanie to [definedTrackSolution](prompty/S01E04/definedTrackSolution.txt).
 
 ## S01E05 — Produkcja
@@ -192,3 +193,20 @@ Rozwiązałem zadanie następująco:
 Dodatkowo zaimplementowałem cache dla transformacji obrazów i audio. Dzięki temu nie musiałem powtarzać tych kosztownych operacji przy dopracowywaniu aplikacji oraz miałem łatwy wgląd w ich postać tekstową.
 
 Rozwiązanie pokazuje, jak skutecznie można łączyć różne modele AI do przetwarzania danych w różnych formatach oraz jak ważna jest optymalizacja w przypadku kosztownych operacji AI.
+
+## S02E05 — Multimodalność w praktyce
+
+![Zdobyta flaga zadania S02E05](./.attachments/Flag_S02E05.png =150x)
+
+Celem zadania było autonomicznie odpowiedzenie na pytania na podstawie informacji z artykułu internetowego.  
+Częścią wyzwania było to, że artykuł, jak to strony w internecie, był w formacie HTML z linkami do zdjęć i plików audio.
+
+Moje rozwiązanie wykorzystuje:
+
+- Zastosowanie serwisu [Firecrawl](https://www.firecrawl.dev/) do pobrania artykułu jako Markdown
+- Parser markdown do wyodrębniania referencji do plików audio
+- GPT-4o do wygenerowania opisu zdjęć
+- Model Whisper do transkrypcji plików dźwiękowych
+- GPT-4o do odpwiedzi na pytania na podstawie wiedzy z przygotowanego artykułu
+
+Celowo przekonwertowałem artykuł na format Markdown przed przesłaniem go do modelu. Ten format dalej lepsze wyniki niż treść w HTMLu.
