@@ -201,12 +201,15 @@ Rozwiązanie pokazuje, jak skutecznie można łączyć różne modele AI do prze
 Celem zadania było autonomicznie odpowiedzenie na pytania na podstawie informacji z artykułu internetowego.  
 Częścią wyzwania było to, że artykuł, jak to strony w internecie, był w formacie HTML z linkami do zdjęć i plików audio.
 
+Moje rozwiązanie: [S02E05](./dotnet/S02E05/Program.cs)
+
 Moje rozwiązanie wykorzystuje:
 
 - Zastosowanie serwisu [Firecrawl](https://www.firecrawl.dev/) do pobrania artykułu jako Markdown
 - Parser markdown do wyodrębniania referencji do plików audio
 - GPT-4o do wygenerowania opisu zdjęć
 - Model Whisper do transkrypcji plików dźwiękowych
+- Cache'owanie opisów zdjęć i transkrypcjach, żeby uniknąć powtarzania tych operacji
 - GPT-4o do odpwiedzi na pytania na podstawie wiedzy z przygotowanego artykułu
 
 Celowo przekonwertowałem artykuł na format Markdown przed przesłaniem go do modelu. Ten format dalej lepsze wyniki niż treść w HTMLu.
