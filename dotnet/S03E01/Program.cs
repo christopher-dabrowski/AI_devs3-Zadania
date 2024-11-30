@@ -39,6 +39,7 @@ IAsyncEnumerable<string> GetFacts()
     var factFiles = Directory.GetFiles(factsPath, "*.txt");
     return factFiles
         .Select(async file => await File.ReadAllTextAsync(file))
+        .ToArray()
         .ToAsyncEnumerable()
         .SelectAwait(async (fact) => await fact)
         .Where(fact => !fact.StartsWith("entry deleted", StringComparison.OrdinalIgnoreCase));
