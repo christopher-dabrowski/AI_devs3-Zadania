@@ -1,0 +1,11 @@
+{
+    "profiles": {
+        "S03E01": {
+            "commandName": "Project",
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "DOTNET_ENVIRONMENT": "Development"
+            }
+        }
+    }
+}
