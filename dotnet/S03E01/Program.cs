@@ -14,9 +14,9 @@ var sp = scope.ServiceProvider;
 var facts = await GetFacts().ToArrayAsync();
 var reportFiles = ListReportFiles();
 
-var systemPrompt = Prompts.KeywordGenerationSystem(facts);
-Console.WriteLine(systemPrompt);
-Environment.Exit(0);
+// var systemPrompt = Prompts.KeywordGenerationSystem(facts);
+// Console.WriteLine(systemPrompt);
+// Environment.Exit(0);
 
 var fileNamesAndKeywords = await reportFiles
     .Select(async reportFile =>
@@ -55,7 +55,12 @@ async Task<string> GenerateKeywords(string reportFilePath, IEnumerable<string> f
     ];
 
     var response = await chatClient.CompleteChatAsync(chatMessages);
-    return response.Value.Content[0].Text;
+    var fullText = response.Value.Content[0].Text;
+
+    var answerIndex = fullText.IndexOf("ANSWER:\n", StringComparison.OrdinalIgnoreCase);
+    return answerIndex >= 0
+        ? fullText[(answerIndex + "ANSWER:\n".Length)..].Trim()
+        : fullText.Trim();
 }
 
 IEnumerable<string> ListReportFiles()
