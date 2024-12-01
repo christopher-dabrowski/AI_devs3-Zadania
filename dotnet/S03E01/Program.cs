@@ -53,6 +53,10 @@ foreach (var reportFile in reportFiles)
         .ToHashSet();
 
     var totalKeywords = keywordsFromReport.Union(factKeywords).ToHashSet();
+
+    var sectorName = ExtractSectorName(fileName);
+    totalKeywords.Add(sectorName);
+
     totalReportKeywords[fileName] = string.Join(", ", totalKeywords);
 }
 
@@ -66,6 +70,13 @@ Console.WriteLine(JsonSerializer.Serialize(taskAnswer));
 var aiDevsApiService = sp.GetRequiredService<IAiDevsApiService>();
 var verificationResult = await aiDevsApiService.VerifyTaskAnswerAsync(taskAnswer);
 Console.WriteLine(JsonSerializer.Serialize(verificationResult));
+
+string ExtractSectorName(string reportFileName)
+{
+    var match = reportFileName.Split('_').LastOrDefault();
+    var sectorNumber = match?.Replace(".txt", "") ?? string.Empty;
+    return $"sektor {sectorNumber}";
+}
 
 async Task<IReadOnlyCollection<string>> SelectFacts(string reportName, string report, IEnumerable<(string Id, string Fact)> facts)
 {
