@@ -1,4 +1,5 @@
 using Common.AiDevsApi.Extensions;
+using Common.Cache.Extensions;
 using Common.OpenAI;
 
 namespace S03E01;
@@ -10,7 +11,8 @@ public static class ServiceCollectionExtensions
         services
             .AddAiDevsApi()
             .AddOpenAIChatClient()
-            .AddOpenAIClient();
+            .AddOpenAIClient()
+            .AddFileCacheService();
 
         return services;
     }

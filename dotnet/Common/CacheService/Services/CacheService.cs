@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Common.Cache.Contracts;
 
 namespace Common.Cache.Services;
@@ -21,6 +22,12 @@ public class FileCacheService : ICacheService
         return await File.ReadAllTextAsync(filePath);
     }
 
+    public async Task<T?> GetAsync<T>(string key)
+    {
+        var data = await GetAsync(key);
+        return data == null ? default : JsonSerializer.Deserialize<T>(data);
+    }
+
     public async Task<byte[]?> GetAsyncBytes(string key)
     {
         var filePath = GetCacheFilePath(key);
@@ -35,6 +42,12 @@ public class FileCacheService : ICacheService
     {
         var filePath = GetCacheFilePath(key);
         await File.WriteAllTextAsync(filePath, data);
+    }
+
+    public async Task SetAsync<T>(string key, T data)
+    {
+        var filePath = GetCacheFilePath(key);
+        await File.WriteAllTextAsync(filePath, JsonSerializer.Serialize(data));
     }
 
     public async Task SetAsyncBytes(string key, byte[] data)
