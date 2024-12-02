@@ -2,7 +2,7 @@ using Common.AiDevsApi.Extensions;
 using Common.Cache.Extensions;
 using Common.OpenAI;
 
-namespace S03E01;
+namespace S03E02;
 
 public static class ServiceCollectionExtensions
 {
