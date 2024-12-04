@@ -247,4 +247,4 @@ Było to moje pierwsze doświadczenie z bazami wektorowymi. Szczególnie interes
 
 Wygenerowałem wizualizację podobieństwa wektorów w mojej bazie :D
 
-<img src="./.attachments/my-first-quadrant-collecion.png" width="150" alt="Wizualizacja podobieństwa wektorów w bazie Qdrant">
+<img src="./.attachments/my-first-quadrant-collecion.png" alt="Wizualizacja podobieństwa wektorów w bazie Qdrant">
