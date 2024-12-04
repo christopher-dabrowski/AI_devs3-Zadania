@@ -1,7 +1,7 @@
 # Spis Treści
 
 - [Spis Treści](#spis-treści)
-- [AI_devs3-Zadania](#ai_devs3-zadania)
+- [AI\_devs3-Zadania](#ai_devs3-zadania)
   - [PreworkApi](#preworkapi)
   - [S01E01 — Interakcja z dużym modelem językowym](#s01e01--interakcja-z-dużym-modelem-językowym)
   - [S01E02 — Przygotowanie własnych danych dla modelu](#s01e02--przygotowanie-własnych-danych-dla-modelu)
@@ -13,6 +13,7 @@
   - [S02E03 — Generowanie i modyfikacja obrazów](#s02e03--generowanie-i-modyfikacja-obrazów)
   - [S02E04 — Połączenie wielu formatów](#s02e04--połączenie-wielu-formatów)
   - [S02E05 — Multimodalność w praktyce](#s02e05--multimodalność-w-praktyce)
+  - [S03E02 — Wyszukiwanie Semantyczne](#s03e02--wyszukiwanie-semantyczne)
 
 # AI_devs3-Zadania
 
@@ -213,3 +214,28 @@ Moje rozwiązanie wykorzystuje:
 - GPT-4o do odpwiedzi na pytania na podstawie wiedzy z przygotowanego artykułu
 
 Celowo przekonwertowałem artykuł na format Markdown przed przesłaniem go do modelu. Ten format dalej lepsze wyniki niż treść w HTMLu.
+
+## S03E02 — Wyszukiwanie Semantyczne
+
+<img src="./.attachments/Flag_S03E02.png" width="150" alt="Zdobyta flaga zadania S03E02">
+
+Zadanie polegało na wykorzystaniu bazy wektorowej do znalezienia odpowiedniego raportu na podstawie zadanego pytania. Wykorzystałem do tego:
+
+- Bazę wektorową Qdrant uruchomioną lokalnie w kontenerze Docker
+- Model OpenAI text-embedding-3-small do generowania embeddingów
+
+Kod rozwiązania: [S03E02](./dotnet/S03E02/Program.cs)
+
+W moim rozwiązaniu:
+
+1. Przygotowałem kolekcję w bazie Qdrant o nazwie "weapons_tests"
+2. Wczytałem raporty z testów broni z plików tekstowych
+3. Wygenerowałem embeddingi dla każdego raportu przy pomocy modelu OpenAI
+4. Zapisałem wektory wraz z metadanymi (data raportu) do bazy Qdrant
+5. Dla zadanego pytania wygenerowałem embedding i wykonałem wyszukiwanie wektorów najbardziej podobnych
+
+Było to moje pierwsze doświadczenie z bazami wektorowymi. Szczególnie interesujące było to, jak baza potrafi znajdować semantycznie podobne dokumenty, nawet jeśli nie zawierają dokładnie tych samych słów, co zapytanie.
+
+Wygenerowałem wizualizację podobieństwa wektorów w mojej bazie :D
+
+<img src="./.attachments/my-first-quadrant-collecion.png" width="150" alt="Wizualizacja podobieństwa wektorów w bazie Qdrant">
