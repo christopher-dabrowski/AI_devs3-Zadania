@@ -13,6 +13,7 @@
   - [S02E03 — Generowanie i modyfikacja obrazów](#s02e03--generowanie-i-modyfikacja-obrazów)
   - [S02E04 — Połączenie wielu formatów](#s02e04--połączenie-wielu-formatów)
   - [S02E05 — Multimodalność w praktyce](#s02e05--multimodalność-w-praktyce)
+  - [S03E01 — Dokumenty](#s03e01--dokumenty)
   - [S03E02 — Wyszukiwanie Semantyczne](#s03e02--wyszukiwanie-semantyczne)
 
 # AI_devs3-Zadania
@@ -214,6 +215,14 @@ Moje rozwiązanie wykorzystuje:
 - GPT-4o do odpwiedzi na pytania na podstawie wiedzy z przygotowanego artykułu
 
 Celowo przekonwertowałem artykuł na format Markdown przed przesłaniem go do modelu. Ten format dalej lepsze wyniki niż treść w HTMLu.
+
+## S03E01 — Dokumenty
+
+<img src="./.attachments/Flag_S03E01.png" width="150" alt="Zdobyta flaga zadania S03E01">
+
+Moje rozwiązanie: [S03E01](./dotnet/S03E01/Program.cs)
+
+_Opis dodam niedługo_
 
 ## S03E02 — Wyszukiwanie Semantyczne
 
