@@ -17,7 +17,7 @@ public static class ServiceCollectionExtensions
 
         return services
             .AddAiDevsApi()
-            .AddOpenAIClient()
+            .AddOpenAIChatClient()
             .AddHttpClient();
     }
 }
