@@ -1,4 +1,4 @@
-namespace S03E04;
+namespace S03E04.Models;
 
 internal record S03E04Options
 {
