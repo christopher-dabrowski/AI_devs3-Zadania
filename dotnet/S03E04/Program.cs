@@ -14,6 +14,9 @@ var sp = scope.ServiceProvider;
 var logger = sp.GetRequiredService<ILogger<Program>>();
 var aiDevsApiService = sp.GetRequiredService<IAiDevsApiService>();
 
+var initialPeopleAndCities = await ExtractNamesAndCitiesAsync();
+Console.WriteLine(JsonSerializer.Serialize(initialPeopleAndCities));
+
 SearchRequest CreateSearchRequest(string query)
 {
     var aiDevsOptions = sp.GetRequiredService<IOptions<AiDevsApiOptions>>().Value;
@@ -36,7 +39,7 @@ async Task<IReadOnlyList<string>> RunQuery(string endpoint, string nameOrTown)
 
     var query = ReplacePolishCharacters(nameOrTown);
     var request = CreateSearchRequest(query);
-    
+
     logger.LogDebug("Endpoint: {endpoint} Query: {query}", endpoint, query);
     var response = await httpClient.PostAsJsonAsync(endpoint, request);
 
@@ -49,7 +52,7 @@ async Task<IReadOnlyList<string>> RunQuery(string endpoint, string nameOrTown)
 
     if (resultsMessage == Consts.RestrictedDataResponse)
         return [];
-    
+
     return resultsMessage
         .Split(" ", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 }
@@ -73,4 +76,28 @@ string ReplacePolishCharacters(string value)
         .Select(c => polishToLatinMap.GetValueOrDefault(c, c))
         .ToArray()
     );
+}
+
+async Task<ExtractNamesAndCitiesResponse> ExtractNamesAndCitiesAsync()
+{
+    var chatClient = sp.GetRequiredService<ChatClient>();
+
+    var messageFilePath = "Resources/Note.txt";
+    var message = await File.ReadAllTextAsync(messageFilePath);
+
+    ChatMessage[] messages = [
+        new SystemChatMessage(Prompts.ExtractNamesAndCitiesSystemPrompt),
+        new UserChatMessage(message)
+    ];
+
+    var options = new ChatCompletionOptions
+    {
+        Temperature = 0,
+    };
+
+    var response = await chatClient.CompleteChatAsync(messages, options);
+    var completion = response.Value.Content[0].Text;
+
+    return JsonSerializer.Deserialize<ExtractNamesAndCitiesResponse>(completion)
+        ?? throw new InvalidOperationException("Unable to parse the chat response");
 }
