@@ -1,3 +1,4 @@
+using Common;
 using Microsoft.Extensions.Logging;
 using S03E04;
 using S03E04.Models;
@@ -16,6 +17,97 @@ var aiDevsApiService = sp.GetRequiredService<IAiDevsApiService>();
 
 var initialPeopleAndCities = await ExtractNamesAndCitiesAsync();
 Console.WriteLine(JsonSerializer.Serialize(initialPeopleAndCities));
+
+var notCheckedPeople = new HashSet<string>(initialPeopleAndCities.Names
+    .Select(s => s.ToUpper())
+    .Select(ReplacePolishCharacters));
+var notCheckedCities = new HashSet<string>(initialPeopleAndCities.Cities
+    .Select(s => s.ToUpper())
+    .Select(ReplacePolishCharacters));
+
+var checkedPeopleResults = new DefaultDictionary<string, HashSet<string>>();
+var checkedCitiesResults = new DefaultDictionary<string, HashSet<string>>();
+
+var barbaraFound = false;
+const int maxAttempts = 200;
+for (var i = 0; i < maxAttempts && !barbaraFound; i++)
+{
+    if (notCheckedPeople.Any())
+    {
+        var personToCheck = notCheckedPeople.First();
+        var seenAt = await GetPlacesWhereWasSeen(personToCheck);
+        var newCities = await AddPersonCheckResult(personToCheck, seenAt);
+        
+        notCheckedCities.UnionWith(newCities);
+        notCheckedPeople.Remove(personToCheck);
+    }
+    else if (notCheckedCities.Any())
+    {
+        var cityToCheck = notCheckedCities.First();
+        var peopleThere = await GetWhoWasThere(cityToCheck);
+        var newPeople = await AddCityCheckResult(cityToCheck, peopleThere);
+        
+        notCheckedPeople.UnionWith(newPeople);
+        notCheckedCities.Remove(cityToCheck);
+
+        var barbaraInResponse = peopleThere
+            .Any(person => person.Equals("BARBARA", StringComparison.OrdinalIgnoreCase));
+        if (barbaraInResponse)
+            barbaraFound = await CheckBarbaraLocationWithApi(cityToCheck);
+        if (barbaraFound)
+            Console.WriteLine($"Found Barbara in {cityToCheck}");
+    }
+    else
+    {
+        Console.WriteLine("No people or places left to check :(");
+        break;
+    }
+}
+
+Console.WriteLine($"Max tries of {maxAttempts} reached");
+
+async Task<bool> CheckBarbaraLocationWithApi(string city)
+{
+    var taskAnswer = new TaskAnswer
+    {
+        Task = "loop",
+        Answer = city
+    };
+    var apiResponse = await aiDevsApiService.VerifyTaskAnswerAsync(taskAnswer);
+    
+    Console.WriteLine(JsonSerializer.Serialize(apiResponse));
+    return apiResponse.IsSuccess;
+}
+
+async Task<IReadOnlyList<string>> AddPersonCheckResult(
+    string name,
+    IReadOnlyList<string> foundCities)
+{
+    var citiesOfPerson = checkedPeopleResults[name];
+    citiesOfPerson.UnionWith(foundCities);
+
+    await File.WriteAllTextAsync("peopleToCities.json", JsonSerializer.Serialize(checkedPeopleResults));
+
+    var newCities = foundCities
+        .Where(c => !checkedCitiesResults.ContainsKey(c))
+        .ToImmutableArray();
+    return newCities;
+}
+
+async Task<IReadOnlyList<string>> AddCityCheckResult(
+    string city,
+    IReadOnlyList<string> foundPeople)
+{
+    var peopleInCity = checkedCitiesResults[city];
+    peopleInCity.UnionWith(foundPeople);
+
+    await File.WriteAllTextAsync("citiesToPeople.json", JsonSerializer.Serialize(checkedCitiesResults));
+
+    var newPeople = foundPeople
+        .Where(p => !checkedPeopleResults.ContainsKey(p))
+        .ToImmutableArray();
+    return newPeople;
+}
 
 SearchRequest CreateSearchRequest(string query)
 {
