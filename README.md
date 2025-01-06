@@ -1,7 +1,7 @@
 # Spis Treści
 
 - [Spis Treści](#spis-treści)
-- [AI\_devs3-Zadania](#ai_devs3-zadania)
+- [AI_devs3-Zadania](#ai_devs3-zadania)
   - [PreworkApi](#preworkapi)
   - [S01E01 — Interakcja z dużym modelem językowym](#s01e01--interakcja-z-dużym-modelem-językowym)
   - [S01E02 — Przygotowanie własnych danych dla modelu](#s01e02--przygotowanie-własnych-danych-dla-modelu)
@@ -15,6 +15,7 @@
   - [S02E05 — Multimodalność w praktyce](#s02e05--multimodalność-w-praktyce)
   - [S03E01 — Dokumenty](#s03e01--dokumenty)
   - [S03E02 — Wyszukiwanie Semantyczne](#s03e02--wyszukiwanie-semantyczne)
+  - [S03E05 - Bazy Grafowe](#s03e05---bazy-grafowe)
 
 # AI_devs3-Zadania
 
@@ -248,3 +249,33 @@ Było to moje pierwsze doświadczenie z bazami wektorowymi. Szczególnie interes
 Wygenerowałem wizualizację podobieństwa wektorów w mojej bazie :D
 
 <img src="./.attachments/my-first-quadrant-collecion.png" alt="Wizualizacja podobieństwa wektorów w bazie Qdrant">
+
+## S03E05 - Bazy Grafowe
+
+<img src="./.attachments/Flag_S03E05.png" width="150" alt="Zdobyta flaga zadania S03E05">
+
+Zadanie polegało na znalezieniu najkrótszej ścieżki połączeń między dwoma osobami na podstawie ich znajomości. Należy wykorzystać do tego dowolną bazę grafową.  
+Zdecydowałem się użyć Neo4j. Nie miałem wcześniej styczności z bazami grafowymi. Uznałem, że chcę poznać najpopularniejsze rozwiązanie.
+
+Zanim zabrałem się za kodowanie przerobiłem podstawowy kurs [Cypher Fundamentals](https://graphacademy.neo4j.com/c/c106d0e3-1a44-4ffc-a322-617ff18a6702/).
+Znając już fundamenty mojej wybranej bazy wziąłem się za rozwiązanie zadana.
+
+Moje rozwiązanie: [S03E05](./dotnet/S03E05/Program.cs)
+
+W implementacji wykorzystałem:
+
+- Neo4j jako bazę grafową uruchomioną lokalnie w kontenerze Docker
+- Oficjalny driver Neo4j dla .NET do komunikacji z bazą
+- Język zapytań Cypher do operacji na grafie
+
+Rozwiązanie składało się z następujących kroków:
+
+1. Pobranie danych użytkowników i ich połączeń z zewnętrznego API
+2. Załadowanie danych do bazy Neo4j:
+   - Utworzenie węzłów dla każdego użytkownika (`:User`)
+   - Utworzenie relacji `:KNOWS` między połączonymi użytkownikami
+3. Znalezienie najkrótszej ścieżki między wskazanymi użytkownikami za pomocą zapytania Cypher wykorzystującego algorytm `SHORTEST PATH`
+4. Przekształcenie wyniku do wymaganego formatu i weryfikacja odpowiedzi
+
+Zadanie nie było trudne, ale była to moja pierwsza styczność z bazami grafowymi.
+Teraz zdecydowanie lepiej rozumiem, jak z nich korzystać i do rozwiązywania jakiego rodzaju problemów będę mógł je wykorzystać w przyszłosci😄
