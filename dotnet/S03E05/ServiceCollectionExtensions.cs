@@ -1,6 +1,6 @@
 using Common.AiDevsApi.Extensions;
+using Common.OpenAi.Extensions;
 using S03E05.Models;
-using Neo4j.Driver;
 
 namespace S03E05;
 
@@ -17,13 +17,4 @@ public static class ServiceCollectionExtensions
             .AddAiDevsApi()
             .AddNeo4j();
     }
-
-    private static IServiceCollection AddNeo4j(this IServiceCollection services) =>
-        services.AddSingleton(sp =>
-            {
-                var taskOptions = sp.GetRequiredService<IOptions<S03E05Options>>().Value;
-
-                var authToken = AuthTokens.Basic(taskOptions.Neo4jUser, taskOptions.Neo4jPassword);
-                return GraphDatabase.Driver(taskOptions.Neo4jUri, authToken);
-            });
 }

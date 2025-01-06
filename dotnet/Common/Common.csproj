@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" />
     <PackageReference Include="OpenAI" />
     <PackageReference Include="System.Linq.Async" />
+    <PackageReference Include="Neo4j.Driver" />
   </ItemGroup>
 
 </Project>
