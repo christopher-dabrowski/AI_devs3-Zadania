@@ -30,6 +30,9 @@ async Task PrepareFineTuningData(string fineTuningDataFileName = "fineTuningData
     {
         await foreach (var line in File.ReadLinesAsync($"Resources/{fileName}"))
         {
+            if (string.IsNullOrWhiteSpace(line))
+                continue;
+
             var tuningExample = CreateFineTuningExample(line, label);
             var serialized = JsonSerializer.Serialize(tuningExample, serializerOptions);
             await fileWriter.WriteLineAsync(serialized);
