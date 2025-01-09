@@ -1,7 +1,7 @@
 # Spis Treści
 
 - [Spis Treści](#spis-treści)
-- [AI_devs3-Zadania](#ai_devs3-zadania)
+- [AI\_devs3-Zadania](#ai_devs3-zadania)
   - [PreworkApi](#preworkapi)
   - [S01E01 — Interakcja z dużym modelem językowym](#s01e01--interakcja-z-dużym-modelem-językowym)
   - [S01E02 — Przygotowanie własnych danych dla modelu](#s01e02--przygotowanie-własnych-danych-dla-modelu)
@@ -16,6 +16,7 @@
   - [S03E01 — Dokumenty](#s03e01--dokumenty)
   - [S03E02 — Wyszukiwanie Semantyczne](#s03e02--wyszukiwanie-semantyczne)
   - [S03E05 - Bazy Grafowe](#s03e05---bazy-grafowe)
+  - [S04E02 — Przetwarzanie treści](#s04e02--przetwarzanie-treści)
 
 # AI_devs3-Zadania
 
@@ -279,3 +280,33 @@ Rozwiązanie składało się z następujących kroków:
 
 Zadanie nie było trudne, ale była to moja pierwsza styczność z bazami grafowymi.
 Teraz zdecydowanie lepiej rozumiem, jak z nich korzystać i do rozwiązywania jakiego rodzaju problemów będę mógł je wykorzystać w przyszłosci😄
+
+## S04E02 — Przetwarzanie treści
+
+<img src="./.attachments/Flag_S04E02.png" width="150" alt="Zdobyta flaga zadania S04E02">
+
+Zadanie polegało na użyciu fine-tuning, do rozpoznawania poprawnych oraz błędnych danych.
+Za pomocą kodu przygotowałem dane w odpowiednim formacie, na podstawie danych źródłowych.
+
+Moje rozwiązanie: [S04E02](./dotnet/S04E02/Program.cs)
+
+W implementacji wykorzystałem:
+
+- Format JSONL do przygotowania danych treningowych
+- Strukturę danych zgodną z wymaganiami OpenAI dla fine-tuningu
+- Podział danych na zbiór treningowy i walidacyjny w proporcji 80% do 20%
+
+Program przetwarza dwa pliki źródłowe:
+
+- `correct.txt` - zawierający przykłady poprawnych danych (oznaczone jako "1")
+- `incorrect.txt` - zawierający przykłady niepoprawnych danych (oznaczone jako "0")
+
+Każdy przykład treningowy składa się z trzech wiadomości:
+
+1. System prompt definiujący zadanie
+2. Treść do kategoryzacji
+3. Oczekiwana odpowiedź (0 lub 1)
+
+Do fine-tuningu wybrałem model 4o-mini, z uwagi na niskie koszty.
+
+Po zakończeniu procesu fine-tuning skategoryzwałem dane w Open AI Playground.
