@@ -26,9 +26,10 @@ app.MapPost("/", async (
     };
 
     var completion = await chatClient.CompleteChatAsync(messages, options);
-    var response = JsonObject.Parse(completion.Value.Content[0].Text);
+    var response = JsonNode.Parse(completion.Value.Content[0].Text)
+        ?? throw new InvalidOperationException("The original JSON was null");
 
-    logger.LogInformation(JsonSerializer.Serialize(response));
+    logger.LogInformation(response.ToJsonString());
     return Results.Ok(response);
 });
 
