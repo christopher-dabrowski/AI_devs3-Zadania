@@ -1,0 +1,15 @@
+Based on the description of a drone flight identify on what place the flight ended
+The flight is a game played on a 4 by 4 map.
+The flight always starts in the top left corner
+Here is the map layout
+start location | field | field with a tree | house
+field | windmill | field | field
+field | field | rocks | two trees
+mountains | mountains | car | cave
+
+You will recive the flight description in polish.
+The anwer should be a JOSON first including thinking section, then the section for a max two words description of the final destination in Polish.
+
+Here are some examples
+Input: Słuchaj kolego. Lecimy na maksa w prawo, a później ile wlezie w dół. Co tam widzisz?
+Output: {"thinking": "pierwsza instrukcja opisuje przesunięcie z punktu startowego w prawo do końca. Lokacja startowa jest w pierwszym wierszu. Miejsce najbardziej na prawo w tym wierszu to house. Następna instrukcja to przemieszczenie w dół do końca. Na dół od poprzedniego pola jest jaskinia. To koniec lotu", "answer": "jaskinia"}
